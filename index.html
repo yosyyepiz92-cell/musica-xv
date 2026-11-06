@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reproductor XV</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 15px;
+      background: transparent;
+      font-family: Georgia, serif;
+      text-align: center;
+    }
+
+    .player {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 20px;
+      border: 1px solid #C7A36F;
+      border-radius: 40px;
+      background: #F6E8EC;
+      color: #542B3B;
+    }
+
+    button {
+      border: none;
+      background: #542B3B;
+      color: white;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .label {
+      font-size: 14px;
+      letter-spacing: 1px;
+    }
+
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="player">
+    <button id="playButton" aria-label="Reproducir música">▶</button>
+    <span class="label">Nuestra canción</span>
+  </div>
+
+  <audio id="music" loop>
+    <source src="musica.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const music = document.getElementById("music");
+    const button = document.getElementById("playButton");
+
+    button.addEventListener("click", async () => {
+      if (music.paused) {
+        try {
+          await music.play();
+          button.textContent = "Ⅱ";
+        } catch (error) {
+          alert("No se pudo reproducir la música. Revisa el archivo de audio.");
+        }
+      } else {
+        music.pause();
+        button.textContent = "▶";
+      }
+    });
+  </script>
+
+</body>
+</html>
